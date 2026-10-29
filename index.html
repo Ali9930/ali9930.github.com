@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nothing.co</title>
+    <style>
+        body {
+            background-color: #202124; /* لون خلفية كروم المظلمة */
+            color: #e8eaed;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .main-container {
+            max-width: 600px;
+            margin-left: 15%; /* محاذاة لليسار تماماً مثل المتصفح الأصلي */
+            padding: 20px;
+        }
+        .icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 30px;
+            opacity: 0.7;
+        }
+        h1 {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #f1f3f4;
+        }
+        p {
+            font-size: 14px;
+            color: #9aa0a6;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .link {
+            color: #8ab4f8;
+            text-decoration: none;
+        }
+        .error-code {
+            font-size: 11px;
+            color: #9aa0a6;
+            margin-top: 25px;
+            text-transform: uppercase;
+        }
+        .reload-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 24px;
+            background-color: #8ab4f8;
+            color: #202124;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 100px;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+        }
+        .reload-btn:hover {
+            background-color: #93bdfc;
+        }
+        
+        /* حاوية الفيديو المباشر تملأ الشاشة بالكامل */
+        #video-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- رسمة أيقونة صفحة الويب المتعطلة لكروم -->
+        <svg class="icon" viewBox="0 0 24 24" fill="#9aa0a6"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        
+        <h1>This site can’t be reached</h1>
+        <p>Check if there is a typo in <span style="color:#f1f3f4;">nothing.co</span>.</p>
+        <p>If spelling is correct, <a class="link" href="#" id="diag-link">try running windows network Diagnostics</a>.</p>
+        
+        <div class="error-code">DNS_PROBE_FINISHED_NXDOMAIN</div>
+        
+        <!-- الزر الذي سيفجر الفخ عند الضغط عليه -->
+        <div class="reload-btn" id="reload-trigger">Reload</div>
+    </div>
+
+    <!-- الآن تم تعديل الرابط بنجاح لملف الـ mp4 المباشر لتخطي الإضافات تماماً -->
+    <div id="video-overlay">
+        <video id="rick-video" preload="auto" playsinline loop>
+            <source src="https://cdn.mtdv.me/video/rick.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script>
+        function startRickroll() {
+            const overlay = document.getElementById('video-overlay');
+            const video = document.getElementById('rick-video');
+            
+            // إظهار الشاشة السوداء للفيديو
+            overlay.style.display = 'block';
+            
+            // تشغيل الفيديو وطلب ملء الشاشة لإتمام الخدعة بنجاح
+            video.play().then(() => {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                }
+            }).catch(err => {
+                console.log("Playback interaction required");
+            });
+        }
+
+        // ربط تشغيل الخدعة بزر Reload والرابط الفرعي لضمان النقر
+        document.getElementById('reload-trigger').addEventListener('click', startRickroll);
+        document.getElementById('diag-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            startRickroll();
+        });
+    </script>
+</body>
+</html>
