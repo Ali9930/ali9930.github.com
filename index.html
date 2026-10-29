@@ -6,7 +6,7 @@
     <title>nothing.co</title>
     <style>
         body {
-            background-color: #202124; /* لون خلفية كروم المظلمة */
+            background-color: #202124;
             color: #e8eaed;
             font-family: "Segoe UI", Tahoma, sans-serif;
             margin: 0;
@@ -20,26 +20,28 @@
         }
         .main-container {
             max-width: 600px;
-            margin-left: 15%; /* محاذاة لليسار تماماً مثل المتصفح الأصلي */
+            margin-left: 15%;
             padding: 20px;
         }
         .icon {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 30px;
-            opacity: 0.7;
+            width: 56px;
+            height: 56px;
+            margin-bottom: 40px;
+            opacity: 0.6;
         }
         h1 {
-            font-size: 22px;
+            font-size: 23px;
             font-weight: 400;
-            margin-bottom: 20px;
+            margin-top: 0;
+            margin-bottom: 24px;
             color: #f1f3f4;
         }
         p {
             font-size: 14px;
             color: #9aa0a6;
             line-height: 1.6;
-            margin-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 16px;
         }
         .link {
             color: #8ab4f8;
@@ -48,12 +50,12 @@
         .error-code {
             font-size: 11px;
             color: #9aa0a6;
-            margin-top: 25px;
+            margin-top: 36px;
             text-transform: uppercase;
         }
         .reload-btn {
             display: inline-block;
-            margin-top: 40px;
+            margin-top: 48px;
             padding: 10px 24px;
             background-color: #8ab4f8;
             color: #202124;
@@ -68,7 +70,6 @@
             background-color: #93bdfc;
         }
         
-        /* حاوية الفيديو المباشر تملأ الشاشة بالكامل */
         #video-overlay {
             display: none;
             position: fixed;
@@ -89,8 +90,8 @@
 <body>
 
     <div class="main-container">
-        <!-- رسمة أيقونة صفحة الويب المتعطلة لكروم -->
-        <svg class="icon" viewBox="0 0 24 24" fill="#9aa0a6"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        <!-- الأيقونة المحدثة لتطابق تماماً الأيقونة الموضحة في الصورة -->
+        <svg class="icon" viewBox="0 0 24 24" fill="#9aa0a6"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm-2 16c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm1-4h-2V9h2v5z"/></svg>
         
         <h1>This site can’t be reached</h1>
         <p>Check if there is a typo in <span style="color:#f1f3f4;">nothing.co</span>.</p>
@@ -98,11 +99,9 @@
         
         <div class="error-code">DNS_PROBE_FINISHED_NXDOMAIN</div>
         
-        <!-- الزر الذي سيفجر الفخ عند الضغط عليه -->
         <div class="reload-btn" id="reload-trigger">Reload</div>
     </div>
 
-    <!-- الآن تم تعديل الرابط بنجاح لملف الـ mp4 المباشر لتخطي الإضافات تماماً -->
     <div id="video-overlay">
         <video id="rick-video" preload="auto" playsinline loop>
             <source src="https://cdn.mtdv.me/video/rick.mp4" type="video/mp4">
@@ -114,10 +113,8 @@
             const overlay = document.getElementById('video-overlay');
             const video = document.getElementById('rick-video');
             
-            // إظهار الشاشة السوداء للفيديو
             overlay.style.display = 'block';
             
-            // تشغيل الفيديو وطلب ملء الشاشة لإتمام الخدعة بنجاح
             video.play().then(() => {
                 if (video.requestFullscreen) {
                     video.requestFullscreen();
@@ -129,7 +126,6 @@
             });
         }
 
-        // ربط تشغيل الخدعة بزر Reload والرابط الفرعي لضمان النقر
         document.getElementById('reload-trigger').addEventListener('click', startRickroll);
         document.getElementById('diag-link').addEventListener('click', function(e) {
             e.preventDefault();
